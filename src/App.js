@@ -75,10 +75,12 @@ function App() {
 
   const removeItem = useCallback((id)=>{
     setTodoList((todoList)=>
-      todoList.filter(item=>{
+      todoList.filter(item => {
+        let newitem;
         if(item.id!==id) {
-          return item;
+          newitem = item;
         }
+        return newitem;
       })
     );
   },[])

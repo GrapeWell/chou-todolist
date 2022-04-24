@@ -9,6 +9,7 @@
 	 */
 
 	/*jslint browser:true, node:true*/
+	// eslint-disable-next-line no-redeclare
 	/*global define, Event, Node*/
 
 
@@ -247,9 +248,9 @@
 		case 'iframe': // iOS8 homescreen apps can prevent events bubbling into frames
 		case 'video':
 			return true;
+		default:
+			return (/\bneedsclick\b/).test(target.className);
 		}
-
-		return (/\bneedsclick\b/).test(target.className);
 	};
 
 
@@ -274,10 +275,10 @@
 			case 'radio':
 			case 'submit':
 				return false;
+			default:
+				// No point in attempting to focus disabled inputs
+				return !target.disabled && !target.readOnly;
 			}
-
-			// No point in attempting to focus disabled inputs
-			return !target.disabled && !target.readOnly;
 		default:
 			return (/\bneedsfocus\b/).test(target.className);
 		}
@@ -742,6 +743,7 @@
 		}
 
 		// Chrome version - zero for other browsers
+		// eslint-disable-next-line no-sparse-arrays
 		chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
 
 		if (chromeVersion) {
@@ -793,6 +795,7 @@
 		}
 
 		// Firefox version - zero for other browsers
+		// eslint-disable-next-line no-sparse-arrays
 		firefoxVersion = +(/Firefox\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
 
 		if (firefoxVersion >= 27) {
